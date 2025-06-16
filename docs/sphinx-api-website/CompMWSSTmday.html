@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CompMWSSTmday Script &#8212; Roy Scripts API 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="CompMWSST Script" href="CompMWSST.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-CompMWSSTmday">
+<span id="compmwsstmday-script"></span><h1>CompMWSSTmday Script<a class="headerlink" href="#module-CompMWSSTmday" title="Link to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Compute monthly SST composites for the MODIS “MW” (West Coast) region by averaging
+daily 1-day SST NetCDF products over a specified interval.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">CompMWSSTmday</span><span class="o">.</span><span class="n">py</span> <span class="o">&lt;</span><span class="n">dataDir</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">workDir</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">endYear</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">endDoy</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">startDoy</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataDir</span></code></p>
+<p>Directory containing 1-day NetCDF files named <code class="docutils literal notranslate"><span class="pre">MW&lt;YYYY&gt;&lt;DDD&gt;*sstd.nc</span></code></p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workDir</span></code></p>
+<p>Temporary working directory for intermediate files</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endYear</span></code></p>
+<p>Four-digit year of the last day in the composite (e.g., <code class="docutils literal notranslate"><span class="pre">2025</span></code>)</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endDoy</span></code></p>
+<p>Three-digit day-of-year of the last day (e.g., <code class="docutils literal notranslate"><span class="pre">082</span></code>)</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startDoy</span></code></p>
+<p>Three-digit day-of-year of the first day (e.g., <code class="docutils literal notranslate"><span class="pre">075</span></code>)</p>
+</li>
+</ul>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Parse command-line arguments</strong> and compute the composite length:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Read <code class="docutils literal notranslate"><span class="pre">dataDir</span></code>, <code class="docutils literal notranslate"><span class="pre">workDir</span></code>, <code class="docutils literal notranslate"><span class="pre">endYear</span></code>, <code class="docutils literal notranslate"><span class="pre">endDoy</span></code>, <code class="docutils literal notranslate"><span class="pre">startDoy</span></code>.</p></li>
+<li><p>Zero-pad <code class="docutils literal notranslate"><span class="pre">endDoy</span></code> and <code class="docutils literal notranslate"><span class="pre">startDoy</span></code>, compute <code class="docutils literal notranslate"><span class="pre">interval</span> <span class="pre">=</span> <span class="pre">endDoy</span> <span class="pre">-</span> <span class="pre">startDoy</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Convert endDoy to a calendar date</strong> (<code class="docutils literal notranslate"><span class="pre">myDateEnd</span></code>) for logging or output paths.</p></li>
+<li><p><strong>Gather all 1-day SST files</strong> spanning <code class="docutils literal notranslate"><span class="pre">startDoy..endDoy</span></code>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Build glob patterns <code class="docutils literal notranslate"><span class="pre">MW&lt;year&gt;&lt;DDD&gt;*sstd.nc</span></code></p></li>
+<li><p>Handles same-year and year-boundary wrap-around cases.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p><strong>Initialize accumulators</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mean</span></code> (float32) and <code class="docutils literal notranslate"><span class="pre">num</span></code> (int32) arrays of shape 2321x4001.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p><strong>Loop over each NetCDF</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open with <code class="docutils literal notranslate"><span class="pre">Dataset()</span></code>.</p></li>
+<li><p>Read the 4D variable <code class="docutils literal notranslate"><span class="pre">MWsstd</span></code>, squeeze to 2D.</p></li>
+<li><p>Update running <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">num</span></code> via <code class="docutils literal notranslate"><span class="pre">meanVar(mean,</span> <span class="pre">num,</span> <span class="pre">sst)</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p><strong>Mask unobserved cells</strong> (<code class="docutils literal notranslate"><span class="pre">num</span> <span class="pre">==0</span></code>) and set fill value <code class="docutils literal notranslate"><span class="pre">-9999999</span></code>.</p></li>
+<li><p><strong>Write composite</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">makeNetcdfmDay(mean,</span> <span class="pre">num,</span> <span class="pre">interval,</span> <span class="pre">outFile,</span> <span class="pre">filesUsed,</span> <span class="pre">workDir)</span></code> to produce a CF-compliant NetCDF.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p><strong>Transfer result</strong>:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">send_to_servers(ncFile,</span> <span class="pre">'/MW/sstd/',</span> <span class="pre">'m')</span></code> to copy the composite to the remote directory.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Python 3.x</strong></p></li>
+<li><p><strong>Standard library:</strong> <code class="docutils literal notranslate"><span class="pre">os</span></code>, <code class="docutils literal notranslate"><span class="pre">sys</span></code>, <code class="docutils literal notranslate"><span class="pre">glob</span></code>, <code class="docutils literal notranslate"><span class="pre">itertools.chain</span></code>, <code class="docutils literal notranslate"><span class="pre">datetime</span></code>, <code class="docutils literal notranslate"><span class="pre">timedelta</span></code></p></li>
+<li><p><strong>Third-party:</strong> <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.ma</span></code>, <code class="docutils literal notranslate"><span class="pre">netCDF4.Dataset</span></code></p></li>
+<li><p><strong>Custom roylib functions:</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">isleap(year)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">meanVar(sum_array,</span> <span class="pre">count_array,</span> <span class="pre">data_slice)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">makeNetcdfmDay(mean,</span> <span class="pre">num,</span> <span class="pre">interval,</span> <span class="pre">outFile,</span> <span class="pre">filesUsed,</span> <span class="pre">workDir)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">send_to_servers(ncFile,</span> <span class="pre">remote_dir,</span> <span class="pre">'m')</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p><strong>Input directory</strong> (dataDir):</p>
+<p>Contains files like <code class="docutils literal notranslate"><span class="pre">MWYYYYDDD*sstd.nc</span></code>, one per day.</p>
+</li>
+<li><p><strong>Working directory</strong> (workDir):</p>
+<p>Cleared and used for any temporary artifacts (none persisted).</p>
+</li>
+<li><p><strong>Output Location</strong> (via <code class="docutils literal notranslate"><span class="pre">makeNetcdfmDay</span></code>):</p>
+<p>Writes <code class="docutils literal notranslate"><span class="pre">MW&lt;startYYYY&gt;&lt;startDDD&gt;_&lt;endYYYY&gt;&lt;endDDD&gt;_sstd.nc</span></code> in <code class="docutils literal notranslate"><span class="pre">&lt;workDir&gt;</span></code> and then copies it to <code class="docutils literal notranslate"><span class="pre">/MW/sstd/</span></code>.</p>
+</li>
+</ul>
+</section>
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading">¶</a></h2>
+<p>Create a January 2025 composite (DOY 001-031):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">CompMWSSTmday</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">MW</span><span class="o">/</span><span class="mi">1</span><span class="n">day</span><span class="o">/</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span> <span class="mi">2025</span> <span class="mi">031</span> <span class="mi">001</span>
+</pre></div>
+</div>
+<p>This command will:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Read daily SST files <code class="docutils literal notranslate"><span class="pre">MW2025001*…MW2025031*</span></code> from <code class="docutils literal notranslate"><span class="pre">/path/to/MW/1day/</span></code>.</p></li>
+<li><p>Compute the 31-day average for each grid cell.</p></li>
+<li><p>Write <code class="docutils literal notranslate"><span class="pre">MW2025001_2025031_sstd.nc</span></code> in <code class="docutils literal notranslate"><span class="pre">/path/to/tmp/</span></code>.</p></li>
+<li><p>Upload the composite to <code class="docutils literal notranslate"><span class="pre">/MW/sstd/</span></code> on the server.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Roy Scripts API</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="roylib.html">roylib Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="newGetModis.html">newGetModis Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makeChla1daynewMB.html">makeChla1daynewMB Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBChla.html">CompMBChla Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBChlamday.html">CompMBChlamday Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makeSST1daynewMB.html">makeSST1daynewMB Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBSST.html">CompMBSST Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBSSTmday.html">CompMBSSTmday Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makeChla1daynewMW.html">makeChla1daynewMW Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMWChla.html">CompMWChla Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMWChlamday.html">CompMWChlamday Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makeSST1daynewMW.html">makeSST1daynewMW Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMWSST.html">CompMWSST Script</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CompMWSSTmday Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="CompMWSST.html" title="previous chapter">CompMWSST Script</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Roy Mendelssohn & Madison Richardson.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/CompMWSSTmday.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
