@@ -4,5 +4,17 @@
   },
   "about.qmd": {
     "about.html": "c393bf0d"
+  },
+  "mb_datasets.qmd": {
+    "mb_datasets.html": "4bef4b23"
+  },
+  "modisa_scripts.qmd": {
+    "modisa_scripts.html": "bdef8f75"
+  },
+  "mw_datasets.qmd": {
+    "mw_datasets.html": "e6f42583"
+  },
+  "roylib.qmd": {
+    "roylib.html": "47c8b6e8"
   }
 }
