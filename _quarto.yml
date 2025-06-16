@@ -3,12 +3,13 @@ project:
   output-dir: docs
 
 website:
-  title: "roy-documentation-site"
+  title: "Documentation of Roy's Scripts"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: Home
+        href: index.qmd
+      - text: "API Reference"
+        href: sphinx-api-website/index.html
 
 format:
   html:

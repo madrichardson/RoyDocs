@@ -1,49 +1,109 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>makeSST1daynewMB Script &mdash; Roy Scripts API 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=412b7542" />
 
-    <title>makeSST1daynewMB Script &#8212; Roy Scripts API 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=2709fde1"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="CompMBSST Script" href="CompMBSST.html" />
-    <link rel="prev" title="CompMBChlamday Script" href="CompMBChlamday.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
+    <link rel="prev" title="CompMBChlamday Script" href="CompMBChlamday.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="index.html" class="icon icon-home">
+            Roy Scripts API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="roylib.html">roylib Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="newGetModis.html">newGetModis Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makeChla1daynewMB.html">makeChla1daynewMB Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBChla.html">CompMBChla Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBChlamday.html">CompMBChlamday Script</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">makeSST1daynewMB Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#land-mask">Land Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBSST.html">CompMBSST Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMBSSTmday.html">CompMBSSTmday Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makeChla1daynewMW.html">makeChla1daynewMW Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMWChla.html">CompMWChla Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMWChlamday.html">CompMWChlamday Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makeSST1daynewMW.html">makeSST1daynewMW Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMWSST.html">CompMWSST Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompMWSSTmday.html">CompMWSSTmday Script</a></li>
+</ul>
 
-          <div class="body" role="main">
-            
-  <section id="module-makeSST1daynewMB">
-<span id="makesst1daynewmb-script"></span><h1>makeSST1daynewMB Script<a class="headerlink" href="#module-makeSST1daynewMB" title="Link to this heading">¶</a></h1>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Roy Scripts API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">makeSST1daynewMB Script</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/makeSST1daynewMB.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a href="../index.html" class="backlink">← Back to Quarto Home</a><section id="module-makeSST1daynewMB">
+<span id="makesst1daynewmb-script"></span><h1>makeSST1daynewMB Script<a class="headerlink" href="#module-makeSST1daynewMB" title="Link to this heading"></a></h1>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>Generate a one-day SST grid for the MODIS “MB” (Pacific Ocean) dataset by combining swaths
 from Level-2 SST NetCDF files over a two-day interval (current day and early hours of the
 next day). The output is a CF-compliant NetCDF file containing daily SST on a regular grid
 (lon 120-320°, lat -45-65°).</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">makeSST1daynewMB</span><span class="o">.</span><span class="n">py</span> <span class="o">&lt;</span><span class="n">dataDir</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">workDir</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">year</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">doy</span><span class="o">&gt;</span>
 </pre></div>
 </div>
@@ -64,7 +124,7 @@ next day). The output is a CF-compliant NetCDF file containing daily SST on a re
 </ul>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
 <ol class="arabic">
 <li><p><strong>Date and Directory Setup</strong></p>
 <blockquote>
@@ -205,7 +265,7 @@ next day). The output is a CF-compliant NetCDF file containing daily SST on a re
 </ol>
 </section>
 <section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
 <ul>
 <li><p><strong>Python 3.x</strong></p></li>
 <li><p><strong>Standard library:</strong> <code class="docutils literal notranslate"><span class="pre">os</span></code>, <code class="docutils literal notranslate"><span class="pre">glob</span></code>, <code class="docutils literal notranslate"><span class="pre">re</span></code>, <code class="docutils literal notranslate"><span class="pre">shutil</span></code>, <code class="docutils literal notranslate"><span class="pre">sys</span></code>, <code class="docutils literal notranslate"><span class="pre">datetime</span></code>, <code class="docutils literal notranslate"><span class="pre">timedelta</span></code>, <code class="docutils literal notranslate"><span class="pre">chain</span></code></p></li>
@@ -226,7 +286,7 @@ next day). The output is a CF-compliant NetCDF file containing daily SST on a re
 </ul>
 </section>
 <section id="land-mask">
-<h2>Land Mask<a class="headerlink" href="#land-mask" title="Link to this heading">¶</a></h2>
+<h2>Land Mask<a class="headerlink" href="#land-mask" title="Link to this heading"></a></h2>
 <ul>
 <li><p>A static GRD file is required at:</p>
 <p><code class="docutils literal notranslate"><span class="pre">/u00/ref/landmasks/LM_120_320_0.025_-45_65_0.025_gridline.grd</span></code></p>
@@ -234,7 +294,7 @@ next day). The output is a CF-compliant NetCDF file containing daily SST on a re
 </ul>
 </section>
 <section id="directory-structure">
-<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Link to this heading">¶</a></h2>
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Link to this heading"></a></h2>
 <ul>
 <li><p><strong>Input swaths directory (Day N)</strong>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;dataDirBase&gt;/&lt;YYYY&gt;&lt;MM&gt;/</span></code> containing files named <code class="docutils literal notranslate"><span class="pre">AQUA_MODIS.&lt;YYYY&gt;&lt;MM&gt;&lt;DD&gt;T*.L2.SST.NRT.nc</span></code>.</p>
@@ -254,7 +314,7 @@ next day). The output is a CF-compliant NetCDF file containing daily SST on a re
 </ul>
 </section>
 <section id="usage-example">
-<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading">¶</a></h2>
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
 <p>Assume your raw SST swaths are in <code class="docutils literal notranslate"><span class="pre">/Users/you/modis_data/netcdf/202503/</span></code> and your working directory is <code class="docutils literal notranslate"><span class="pre">/Users/you/modis_work/</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">makeSST1daynewMB</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">you</span><span class="o">/</span><span class="n">modis_data</span><span class="o">/</span><span class="n">netcdf</span><span class="o">/</span>                               <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">you</span><span class="o">/</span><span class="n">modis_work</span><span class="o">/</span>                               <span class="mi">2025</span> <span class="mi">082</span>
 </pre></div>
@@ -274,92 +334,34 @@ next day). The output is a CF-compliant NetCDF file containing daily SST on a re
 </section>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CompMBChlamday.html" class="btn btn-neutral float-left" title="CompMBChlamday Script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CompMBSST.html" class="btn btn-neutral float-right" title="CompMBSST Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Roy Mendelssohn &amp; Madison Richardson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Roy Scripts API</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="roylib.html">roylib Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="newGetModis.html">newGetModis Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="makeChla1daynewMB.html">makeChla1daynewMB Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompMBChla.html">CompMBChla Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompMBChlamday.html">CompMBChlamday Script</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">makeSST1daynewMB Script</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#land-mask">Land Mask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="CompMBSST.html">CompMBSST Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompMBSSTmday.html">CompMBSSTmday Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="makeChla1daynewMW.html">makeChla1daynewMW Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompMWChla.html">CompMWChla Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompMWChlamday.html">CompMWChlamday Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="makeSST1daynewMW.html">makeSST1daynewMW Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompMWSST.html">CompMWSST Script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CompMWSSTmday.html">CompMWSSTmday Script</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="CompMBChlamday.html" title="previous chapter">CompMBChlamday Script</a></li>
-      <li>Next: <a href="CompMBSST.html" title="next chapter">CompMBSST Script</a></li>
-  </ul></li>
-</ul>
-</div>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2025, Roy Mendelssohn & Madison Richardson.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
-      
-      |
-      <a href="_sources/makeSST1daynewMB.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

@@ -27,10 +27,21 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', 'sphinx.ext.napoleon'
 templates_path = ['_templates']
 exclude_patterns = []
 
-
-
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
+
 html_static_path = ['_static']
+
+# Tell Sphinx to copy "_static/custom.css" into each HTML page
+html_css_files = [
+    'custom.css',
+]
+
+# This HTML will be inserted at the very top of every generated page:
+rst_prolog = """
+.. raw:: html
+
+   <a href="../index.html" class="backlink">← Back to Quarto Home</a>
+"""
