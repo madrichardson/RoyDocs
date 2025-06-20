@@ -239,6 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="makechla1daynewmb" class="level3">
 <h3 class="anchored" data-anchor-id="makechla1daynewmb">makeChla1daynewMB</h3>
 <p><code>makeChla1daynewMB.py</code> ingests Level-2 chlorophyll-a swath NetCDFs for the target day (HOD &gt; 10) and early hours of the next day (HOD ≤ 10), filters to “Day” pixels within longitude 120–320° and latitude –45–65°, and interpolates onto a 0.025° × 0.025°regular grid. The resulting 1-day composite is land-masked, written as a CF-compliant NetCDF, and deployed automatically to a remote server directory. Find the 1-day product on ERDDAP <a href="./modisa_scripts.html#modisa-products-on-swfsc-erddap-server">here</a>.</p>
+<p>The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/makeChla1daynewMB.py</code></p>
 <p>The following chart summarizes the script’s workflow:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -256,7 +257,7 @@ flowchart LR
 </div>
 </div>
 </div>
-<div id="9080b2c2" class="cell" data-execution_count="1">
+<div id="d377c4f6" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>View makeChla1daynewMB.py</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">"""</span></span>
@@ -687,6 +688,7 @@ flowchart LR
 <section id="compmbchla" class="level3">
 <h3 class="anchored" data-anchor-id="compmbchla">CompMBChla</h3>
 <p><code>CompMBChla.py</code> reads the daily 1-day chlorophyll-a NetCDF files over a user-defined interval, accumulates running sum and count arrays on a 0.025° × 0.025° regular grid spanning longitude 120°–320° and latitude –45°–65°, then masks out cells with no observations and writes the averaged multi-day (3-, 5-, 8-, or 14-day) composite as a CF-compliant NetCDF. It finishes by uploading the final composite to a directory on a remote server. Find the multi-day products on ERDDAP <a href="./modisa_scripts.html#modisa-products-on-swfsc-erddap-server">here</a>.</p>
+<p>The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/CompMBChla.py</code></p>
 <p>The following chart summarizes the script’s workflow:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -704,7 +706,7 @@ flowchart LR
 </div>
 </div>
 </div>
-<div id="74df580a" class="cell" data-execution_count="2">
+<div id="ad34014e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>View CompMBChla.py</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">"""</span></span>
@@ -1022,6 +1024,7 @@ flowchart LR
 <section id="compmbchlamday" class="level3">
 <h3 class="anchored" data-anchor-id="compmbchlamday">CompMBChlamday</h3>
 <p><code>CompMBChlamday.py</code> ingests 1-day composite Chla NetCDF files over user-defined date range and maps them onto a 0.025° × 0.025° regular grid spanning longitude 120°–320° and latitude –45°–65°, accumulating sums and counts to compute the monthly mean. It then masks out points with no observations, writes the result as a CF-compliant NetCDF, and uploads it to a directory on a remote server. Find the monthly product on ERDDAP <a href="./modisa_scripts.html#modisa-products-on-swfsc-erddap-server">here</a>.</p>
+<p>The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/CompMBChlamday.py</code></p>
 <p>The following chart summarizes the script’s workflow:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1039,7 +1042,7 @@ flowchart LR
 </div>
 </div>
 </div>
-<div id="4e8584c5" class="cell" data-execution_count="3">
+<div id="8f180a14" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>View CompMBChlamday.py</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">"""</span></span>
@@ -1363,6 +1366,7 @@ flowchart LR
 <section id="makesst1daynewmb" class="level3">
 <h3 class="anchored" data-anchor-id="makesst1daynewmb">makeSST1daynewMB</h3>
 <p><code>makeSST1daynewMB</code> makes a 1-day SST composite for the MB dataset by aggregating valid Level-2 swaths from the target day (HOD &gt; 10) and early hours of the following day (HOD ≤ 10), then interpolating onto a 0.025° × 0.025° regular grid spanning longitude 120–320° and latitude –45–65° via PyGMT. It writes out a CF-compliant NetCDF, masks land using a static grid, computes coverage statistics, and uploads the resulting file to a directory on the remote server. Find the 1-day product on ERDDAP <a href="./modisa_scripts.html#modisa-products-on-swfsc-erddap-server">here</a>.</p>
+<p>The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/makeSST1daynewMB.py</code></p>
 <p>The following chart summarizes the script’s workflow:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1380,7 +1384,7 @@ flowchart LR
 </div>
 </div>
 </div>
-<div id="717ccfaf" class="cell" data-execution_count="4">
+<div id="cf431f41" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>View makeSST1daynewMB.py</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">"""</span></span>
@@ -1918,6 +1922,7 @@ flowchart LR
 <section id="compmbsst" class="level3">
 <h3 class="anchored" data-anchor-id="compmbsst">CompMBSST</h3>
 <p><code>CompMBSST.py</code> makes the 3, 5, 8, 14-day SST composites by averaging 1-day MB SST NetCDF files over user-specified interval of days, accumulates running sum and count arrays on a 0.025° × 0.025° regular grid spanning longitude 120°–320° and latitude –45°–65°. It accumulates running sums and counts, masks out unobserved pixels, writes a CF-compliant NetCDF, and uploads the result to a directory on the remote server. Find the multi-day products on ERDDAP <a href="./modisa_scripts.html#modisa-products-on-swfsc-erddap-server">here</a>.</p>
+<p>The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/CompMBSST.py</code></p>
 <p>The following chart summarizes the script’s workflow:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1935,7 +1940,7 @@ flowchart LR
 </div>
 </div>
 </div>
-<div id="f439840d" class="cell" data-execution_count="5">
+<div id="69c9f780" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>View CompMBSST.py</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">"""</span></span>
@@ -2255,6 +2260,7 @@ flowchart LR
 <section id="compmbsstmday" class="level3">
 <h3 class="anchored" data-anchor-id="compmbsstmday">CompMBSSTmday</h3>
 <p><code>CompMBSSTmday.py</code> reads daily 1-day SST NetCDF files for a user-specified date range and accumulates running sum and count arrays on a 0.025° × 0.025° regular grid spanning longitude 120°–320° and latitude –45°–65°. It then masks out any grid cells with zero observations and writes the averaged monthly composite as a CF-compliant NetCDF, which is automatically uploaded to a directory on the remote server. Find the monthly product on ERDDAP <a href="./modisa_scripts.html#modisa-products-on-swfsc-erddap-server">here</a>.</p>
+<p>The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/CompMBSSTmday.py</code></p>
 <p>The following chart summarizes the script’s workflow:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -2272,7 +2278,7 @@ flowchart LR
 </div>
 </div>
 </div>
-<div id="9ceaeebb" class="cell" data-execution_count="6">
+<div id="1b7f1fe7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>View CompMBSSTmday.py</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">"""</span></span>

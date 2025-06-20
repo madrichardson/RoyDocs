@@ -225,10 +225,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-fetch-orchestration" class="level2">
 <h2 class="anchored" data-anchor-id="data-fetch-orchestration">Data Fetch &amp; Orchestration</h2>
 <p>Welcome to <strong>Roy’s MODISA Scripts</strong> - the central page for the <code>newGetModis.py</code> orchestrator.</p>
-<p><code>newGetModis.py</code> leverages the helper functions in <code>roylib.py</code> to download MODISA NRT Level 2 files to create the 1-, 3-, 8-, 14- day composites for the MB (Pacific Ocean) and MW (West Coast) datasets. The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/newGetModis.py</code></p>
+<p><code>newGetModis.py</code> leverages the helper functions in <code>roylib.py</code> to download MODISA NRT Level 2 files to create the 1-, 3-, 8-, 14- day composites for the MB (Pacific Ocean) and MW (West Coast) datasets.</p>
+<p>The script can be found here on saltydog: <code>/home/cwatch/newPython/modisa/newGetModis.py</code></p>
 <p>The ERDDAP products created by this script are located here on the <a href="#swfsc-erddap-server">SWFSC ERDDAP Server</a>.</p>
 <p>The <strong>newGetModis.py</strong> script downloads the last four days of MODIS Level-2 SST and Chlorophyll-a files, then runs the appropriate processing pipelines to build both daily and rolling composites for MB and MW products. It flags which days actually acquired new data, invokes the 1-day scripts (<code>make*1day*.py</code>), and then triggers the multi-day composites (<code>Comp*</code> scripts) for 3-, 5-, 8-, and 14-day periods. For full script details, see the <strong>newGetModis</strong> API reference <a href="sphinx-api-website/newGetModis.html">here</a>.</p>
-<div id="9d0bf9dc" class="cell" data-execution_count="1">
+<div id="d266682e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>View newGetModis.py</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">"""</span></span>
